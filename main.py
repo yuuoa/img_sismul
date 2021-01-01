@@ -42,15 +42,15 @@ def main():
     os.rename(r'sf',r'sf.png')
     im = Image.open("sf.png")
 
+    #password = sistemmultimedia
     passkey = "c39d849dabfe3301af378c4dcf3486ce"
-    password = input("enter string: ")
-    result = hashlib.md5(password.encode()) 
+    password = input("enter string: ") 
 
-    if result.hexdigest == passkey:
+    if hashlib.md5(password.encode()).hexdigest() == passkey:
         print("Password correct! image decrypted")
         lim = decrypt(im, 100)
         lim.save("decrypted.png")
-    elif result.hexdigest != passkey:
+    else:
         print("Password incorrect! image encrypted")
         lim = encrypt(im, 100)
         lim.save("encrypted.png")
