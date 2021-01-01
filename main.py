@@ -37,23 +37,25 @@ def decrypt(image, key):
     return myimg
 
 def main():
-    print("Pengamanan PNG versi 1.1")
+    print("Pengamanan PNG versi 1.2")
 
-    os.rename(r'C:\Users\Yuuoa\img_sismul\sf',r'C:\Users\Yuuoa\img_sismul\sf.png')
+    os.rename(r'sf',r'sf.png')
     im = Image.open("sf.png")
 
-    lim = encrypt(im, 100)
-    lim.save("encrypted.png")
+    passkey = "c39d849dabfe3301af378c4dcf3486ce"
+    password = input("enter string: ")
+    result = hashlib.md5(password.encode()) 
 
-    print("File encrypted! Now lets decrypt it again.")
+    if result.hexdigest == passkey:
+        print("Password correct! image decrypted")
+        lim = decrypt(im, 100)
+        lim.save("decrypted.png")
+    elif result.hexdigest != passkey:
+        print("Password incorrect! image encrypted")
+        lim = encrypt(im, 100)
+        lim.save("encrypted.png")
 
-    im = Image.open("encrypted.png")
-
-    lim = decrypt(im, 100)
-    lim.save("decrypted.png")
-    os.rename(r'C:\Users\Yuuoa\img_sismul\sf.png',r'C:\Users\Yuuoa\img_sismul\sf')
-
-    print("File decrypted!")
+    os.rename(r'sf.png',r'sf')
 
 if __name__ == "__main__":
     main()
