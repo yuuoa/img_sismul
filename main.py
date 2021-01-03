@@ -48,15 +48,12 @@ def decrypt(image, key):
 def main():
     print("Pengamanan PNG versi 1.6")
 
-    im = Image.open("sample.png")
+    os.rename(r'sf',r'sf.png')
+    im = Image.open("sf.png")
 
     # password = sistemmultimedia
     passkey = "c39d849dabfe3301af378c4dcf3486ce"
     xorkey  = 150
-
-    print("Mengenkripsi gambar...")
-    lim = encrypt(im, xorkey)
-    lim.save("encrypted.png")
 
     password = input("Enter first key (to open data): ")
 
@@ -71,6 +68,8 @@ def main():
         print("Password incorrect! image encrypted")
         lim = encrypt(im, xorkey)
         lim.save("encrypted.png")
+    
+        os.rename(r'sf.png',r'sf')
 
 
 if __name__ == "__main__":
