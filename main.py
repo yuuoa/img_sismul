@@ -2,6 +2,12 @@ from PIL import Image
 import base64
 import hashlib
 import os
+# from Crypto.Cipher import AES
+# from Crypto.Random import get_random_bytes
+
+# pip install pillow
+# pycryptodome required to use AES.
+
 
 def encrypt(image, key):
     myimg = image
@@ -42,12 +48,17 @@ def decrypt(image, key):
 def main():
     print("Pengamanan PNG versi 1.6")
 
-    os.rename(r'sf',r'sf.png')
-    im = Image.open("sf.png")
+    os.rename(r'sf',r'sample.png')
+    im = Image.open("sample.png")
 
     # password = sistemmultimedia
     passkey = "c39d849dabfe3301af378c4dcf3486ce"
     xorkey  = 150
+
+    lim = encrypt(im, xorkey)
+    lim = encrypt(im, xorkey)
+    lim.save("dice.png")
+
 
     password = input("Enter first key (to open data): ")
 
@@ -57,14 +68,15 @@ def main():
         mkey = int(input("Enter second key (to descramble color): "))
 
         lim = decrypt(im, mkey)
-        lim.save("decrypted.png")
+        lim = decrypt(im, mkey)
+        lim = decrypt(im, mkey)
+        os.remove("dice.png")
+        lim.save("dice.png")
+
     else:
         print("Password incorrect! image encrypted")
-        lim = encrypt(im, xorkey)
-        lim.save("encrypted.png")
-    
-    os.rename(r'sf.png',r'sf')
 
+    os.rename(r'sample.png',r'sf')
 
 if __name__ == "__main__":
     main()
