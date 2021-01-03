@@ -2,12 +2,6 @@ from PIL import Image
 import base64
 import hashlib
 import os
-# from Crypto.Cipher import AES
-# from Crypto.Random import get_random_bytes
-
-# pip install pillow
-# pycryptodome required to use AES.
-
 
 def encrypt(image, key):
     myimg = image
@@ -69,7 +63,7 @@ def main():
         lim = encrypt(im, xorkey)
         lim.save("encrypted.png")
     
-        os.rename(r'sf.png',r'sf')
+    os.rename(r'sf.png',r'sf')
 
 
 if __name__ == "__main__":
